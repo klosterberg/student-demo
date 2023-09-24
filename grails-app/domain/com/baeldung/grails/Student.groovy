@@ -17,4 +17,10 @@ class Student
         firstName maxSize: 255
         lastName  maxSize: 255
     }
+
+
+    @Override
+    public String toString() {
+        return "$firstName $lastName"
+    }
 }
