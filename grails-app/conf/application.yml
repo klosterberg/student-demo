@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: com.foreach.grails
+        defaultPackage: com.baeldung.grails
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
