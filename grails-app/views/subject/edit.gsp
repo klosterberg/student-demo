@@ -33,12 +33,12 @@
                     </g:hasErrors>
                     <g:form resource="${this.subject}" method="PUT">
                         <g:hiddenField name="version" value="${this.subject?.version}" />
-                        <fieldset class="form">
-                            <f:all bean="subject"/>
-                        </fieldset>
-                        <fieldset class="buttons">
+                        <field-set class="form">
+                            <f:all bean="subject" except="featuredImageBytes, featuredImageContentType"/>
+                        </field-set>
+                        <field-set class="buttons">
                             <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                        </fieldset>
+                        </field-set>
                     </g:form>
                 </div>
             </section>

@@ -26,14 +26,20 @@
                     </g:if>
                     <f:display bean="subject" />
                     <g:form resource="${this.subject}" method="DELETE">
-                        <fieldset class="buttons">
-                            <g:link class="edit" action="edit" resource="${this.subject}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                        <field-set class="buttons">
+                            <g:link class="edit" action="editFeaturedImage" resource="${this.subject}"><g:message code="subject.featuredImageUrl.edit.label" default="Edit Featured Image" /></g:link>
                             <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                        </fieldset>
+                        </field-set>
                     </g:form>
                 </div>
             </section>
         </div>
     </div>
+
+    <h1><f:display bean="subject" property="name" /></h1>
+    <g:if test="${this.subject.featuredImageBytes}">
+        <img src="<g:createLink controller="subject" action="featuredImage" id="${this.subject.id}"/>" width="400"/>
+    </g:if>
+
     </body>
 </html>

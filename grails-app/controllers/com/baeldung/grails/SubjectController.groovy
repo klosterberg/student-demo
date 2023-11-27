@@ -96,4 +96,56 @@ class SubjectController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def editFeaturedImage(Long id) {
+        Subject subject = subjectService.get(id)
+        if (!subject) {
+            notFound()
+        }
+        [subject: subject]
+    }
+
+    def uploadFeaturedImage(FeaturedImageCommand cmd) {
+        if (cmd == null) {
+            notFound()
+            return
+        }
+
+        if (cmd.hasErrors()) {
+            respond(cmd.errors, model: [subject: cmd], view: 'editFeaturedImage')
+            return
+        }
+
+        Subject subject = subjectService.update(cmd.id,
+                cmd.version,
+                cmd.featuredImageFile.bytes,
+                cmd.featuredImageFile.contentType
+        )
+
+        if (subject == null) {
+            notFound()
+            return
+        }
+
+        if (subject.hasErrors()) {
+            respond(subject.errors, model: [subject: subject], view: 'editFeaturedImage')
+            return
+        }
+
+        Locale locale = request.locale
+        // flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), cmd.id, locale)
+        flash.message = "crudMessageService.message(CRUD.UPDATE, domainName(locale), cmd.id, locale)"
+        redirect subject
+    }
+
+    def featuredImage(Long id) {
+        Subject subject = subjectService.get(id)
+        if (!subject || subject.featuredImageBytes == null) {
+            notFound()
+            return
+        }
+        render file: subject.featuredImageBytes,
+                contentType: restaurant.featuredImageContentType
+
+    }
 }

@@ -9,7 +9,7 @@
     <div id="content" role="main">
         <div class="container">
             <section class="row">
-                <a href="#list-subject" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+                <a href="#list-subject" class="skip" tab-index="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
                 <div class="nav" role="navigation">
                     <ul>
                         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -23,7 +23,7 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${subjectList}" properties="['name', 'id', 'version']"/>
+                    <f:table collection="${subjectList}" properties="['name']"/>
 
                     <g:if test="${subjectCount > params.int('max')}">
                     <div class="pagination">
